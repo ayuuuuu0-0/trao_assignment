@@ -20,17 +20,22 @@ This document records the core architectural and implementation decisions for th
 ## D2. LLM Provider, Quota Management, and Fallback
 
 - **Decision:**
-  - Primary Provider: Gemini 3.1 Flash-Lite (or Gemini 3.5 Flash-Lite) via Google AI Studio API. Model name configured via `LLM_MODEL`. Generous free tier (~500 RPD vs 20 RPD on 2.5 Flash-Lite).
-  - Optional Fallback Provider: Qwen Flash / Qwen Plus via Alibaba DashScope OpenAI-compatible endpoint.
-  - Optional Fallback Resilience: The system functions as a robust single-provider pipeline if no fallback key is configured.
-  - Rate Limit Discrimination: Distinguish per-minute 429 errors from daily-quota 429 errors:
-    - Per-minute 429: Apply `Retry-After` header or exponential backoff with random jitter.
-    - Daily-quota 429: Fail over immediately to fallback provider or surface quota exhaustion without delay.
-  - Circuit Breaker: If a provider fails N consecutive times (default 3), trigger a cooldown window skipping subsequent calls to that provider.
-  - Call Tracing: Record provider identity (`gemini` or `qwen`), token estimates, and latency on each call trace.
-  - Schema Truth: Zod schemas in `packages/core` remain the single source of truth for runtime validation across all providers.
-  - Development Cache: Include a development-only cache (`LLM_CACHE=true`) keyed by prompt hash to conserve API quotas during local test iterations.
-- **Reason:** Prevents pipeline crashes during automated multi-case evaluation, respects free-tier constraints, and ensures transparent operational observability.
+  - Primary: `gemini-3.1-flash-lite` (or `gemini-3.5-flash-lite`) via Google AI Studio. ~500 RPD on the free tier. Checked 21 Sep 2026.
+  - Fallback 1 (optional): Mistral via `api.mistral.ai/v1` (OpenAI-compatible). Free mode on by default for new accounts. No fixed daily allowance published; tracker reports ~1 request per second. Opt out of training data use in Admin Console under Privacy before use. Verify Indian phone number works during signup before building against it.
+  - Fallback 2 (optional): GLM-4.7-Flash via `api.z.ai/api/paas/v4` (international, email signup only). Priced at free. Concurrency limit of 1. Use only 4.7 (4.5 is being retired).
+  - Groq: not in the ordered chain. Its 8K TPM free limit is too small; one full extraction prompt can half-use it.
+  - OpenRouter free models: capped at 50 RPD until credits are purchased. Not used.
+  - Qwen: not accessible from India. Not used.
+  - DeepSeek and Kimi: require payment. Not used.
+  - **Provider chain is a generic ordered list** driven entirely by environment variables. No provider name is hard-coded. Each entry has its own base URL, key, model name, RPM, TPM, and concurrency. Swap or extend providers by changing `.env` alone. See `LLM_PROVIDER_1_*` through `LLM_PROVIDER_3_*` in `.env.example`.
+  - Rate limit discrimination:
+    - Per-minute 429: honour `Retry-After`, then exponential backoff with 25 percent jitter, cap 60 s, max 5 attempts.
+    - Daily-quota 429 (no `Retry-After`, or `Retry-After` > 300 s): fail over to next provider immediately without waiting.
+  - Circuit breaker: after 3 consecutive failures from one provider, mark it on cooldown for 5 minutes. Skip it in subsequent calls.
+  - Call trace: record provider name, model, estimated tokens, latency in ms, attempt number, and outcome on every call.
+  - Development cache: `LLM_DEV_CACHE=true` stores responses keyed by SHA-256 of prompt + model in `.cache/llm/`. Committed to `.gitignore`. Off by default.
+- **Reason:** Prevents pipeline crashes during multi-case evaluation. Graders set only the keys they have; the chain degrades gracefully to a single-provider setup when fallback keys are absent.
+
 
 ---
 
