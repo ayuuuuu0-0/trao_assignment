@@ -15,3 +15,5 @@ Thumbs.db
 .cache
 tmp
 scratch
+test/fixtures/output*.json
+.cache

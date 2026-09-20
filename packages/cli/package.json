@@ -1,0 +1,18 @@
+{
+  "name": "@prepkit/cli",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "./src/evaluate.ts",
+  "scripts": {
+    "evaluate": "tsx ./src/evaluate.ts"
+  },
+  "dependencies": {
+    "@prepkit/core": "*"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}

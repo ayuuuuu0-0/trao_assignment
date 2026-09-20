@@ -1,0 +1,21 @@
+{
+  "name": "ai-interview-prep-kit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Interview Prep Kit monorepo",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "evaluate": "tsx packages/cli/src/evaluate.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "build": "npm run --workspaces --if-present build"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
