@@ -1,0 +1,14 @@
+[
+  {
+    "id": "case-01",
+    "jd": "Senior Backend Engineer\n\nWe are looking for a Senior Backend Engineer with 5+ years of Node.js and TypeScript experience to design high-throughput microservices. Experience with distributed caching and message brokers like Kafka is required.",
+    "company_url": "http://localhost:8099/acme/",
+    "days": 5
+  },
+  {
+    "id": "case-02",
+    "jd": "Frontend Developer\n\nMust have 3 years React and modern CSS. Nice to have Tailwind and GraphQL experience.",
+    "company_url": "http://localhost:8099/globex/",
+    "days": 3
+  }
+]
