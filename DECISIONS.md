@@ -168,3 +168,95 @@ This document records the core architectural and implementation decisions for th
 ## D17. Undo and Section Snapshots
 
 - **Decision:** Before executing a section regeneration, the server records an immutable snapshot of the affected section, providing an instant one-click Undo action if the user prefers their prior state.
+
+---
+
+## D18. Frontend Visual Design
+
+- **Decision:** Dark aesthetic theme with heavy inspiration from [interviewing.io](https://interviewing.io) as a reference. The app must look modern and polished — this is a signal of craft, not just functionality.
+- **Open (YOU — decide before building frontend):**
+  - Accent colour: not yet chosen. Candidates: electric blue, teal, violet. Pick one and note it here.
+  - Font: not yet chosen. Candidates: Inter, Geist, Sora. Pick a heading and a body font.
+  - Layout density: card-based with clear dark panels and subtle borders, or a sidebar-and-content split like interviewing.io.
+- **Fixed constraints:**
+  - Background: near-black (for example `#0a0a0f` or `#0d0d14`), never pure black.
+  - Surface cards: slightly lighter dark (for example `#13131a`), 1 px border in muted colour.
+  - Text: off-white primary, muted secondary (never pure white on pure black).
+  - Minimum contrast 4.5:1 everywhere. Test with browser DevTools.
+  - All interactive states (hover, focus, active) must be visible in the dark theme.
+  - Tailwind CSS only. No inline styles, no CSS-in-JS other than Tailwind utilities and `@layer`.
+- **Consequence in code:** `packages/web/src/app/globals.css` defines a dark-mode-first CSS variable set. `tailwind.config.ts` extends the palette with the chosen accent and neutral scale. A `ThemeProvider` is not needed — the app is always dark.
+- **Consequence in README:** One screenshot showing the kit viewer page in the dark theme.
+- **Date and who approved:** YOU — fill in after choosing accent and fonts.
+
+---
+
+## D19. Mock Feature Design Principle
+
+- **Decision:** The mock interview feature (improvement loop — see D22) must rely on data and code as its primary mechanism. AI generation is used sparingly and only where deterministic logic cannot produce the same quality result.
+- **What this means in practice:**
+  - Timer, confidence tracking, session ordering, and debrief recording are all deterministic code with no model calls.
+  - Question selection for a mock is deterministic: select from the kit's own questions filtered by the debrief's weak spots and gaps.
+  - A model call is only permitted for the pre-interview mock scoring step (D22), and only if the core is done by Wednesday 16:00.
+  - If AI is called, it must receive validated structured input (the user's written answer + the reference outline) and return a structured score, not free-form text. Schema-validated before use.
+- **Reason:** Keeps the mock testable, reproducible, and fast. Prevents the feature from becoming a liability if LLM quota runs out. The brief credits deterministic design.
+
+---
+
+## D20. Deployed Demo Job Site
+
+- **Decision:** Build and deploy a small static site serving fictional company careers pages alongside the main app. Recommended: deploy it to the same platform (for example Render or Railway static site, or a Vercel sub-path), so it is always reachable without a separate domain.
+- **Why:** The batch CLI's 5-case test and the end-to-end fixture test need a real crawlable HTTP server. Using the deployed demo site means the clean-clone test does not require `localhost` and the grader can reproduce results without running a local server.
+- **Minimal spec (build this before the clean-clone test on Tuesday):**
+  - At least 3 fictional companies, each with a root page, an About page and a Careers page with 2–3 realistic-looking job posting links.
+  - One company has no Careers page (tests `NO_HIRING_PAGE`).
+  - One company's robots.txt disallows `/careers/` (tests robots compliance).
+  - Plain HTML and CSS only, no build step.
+- **Consequence in code:** Add the deployed demo URLs to `test/fixtures/cases.json` (cases 3–5). Add a `DEMO_SITE_BASE_URL` env var so the URL can be changed without editing fixtures.
+- **Consequence in README:** Document the demo site and link to it.
+
+---
+
+## D21. Data Sources Without LinkedIn and Glassdoor
+
+- **Decision:**
+  - Primary public discussion source: Hacker News Search API (Algolia, already in D3). Free, no credentials, structured JSON.
+  - Secondary: a **pasted-notes field** in the create-kit form. The user can paste raw text from any source they trust (LinkedIn comments, Glassdoor snippets copied manually, recruiter emails). This text is treated as an additional source, wrapped with `wrapUntrusted`, and fed into the discussion summary prompt.
+- **Why not scrape LinkedIn or Glassdoor:** Both block automated access and violate terms of service. A paste field gives the user access to those sources without the app scraping them.
+- **Field spec:** Optional textarea in `CreateKitForm`, label "Paste any interview notes or Glassdoor/LinkedIn snippets (optional)". Character limit 4,000. Stored as `extra_notes` in the kit input (extension field, listed in this document). Passed to `extractProcess` as an additional source with `label: "user-notes"`.
+- **Consequence in schema:** Add `extra_notes?: string` to the kit input type (extension field).
+- **Consequence in README:** List "Hacker News Search API (Algolia)" and "user-pasted notes" as sources. Explain why LinkedIn and Glassdoor are not scraped.
+
+---
+
+## D22. Improvement Loop (Creative Feature Decision)
+
+- **Decision:** Build the improvement loop as the creative feature if the core is complete by Wednesday 16:00. Skip it otherwise and say so in the README.
+- **Design principle:** D19 applies. Data and code first; AI sparingly.
+- **Three parts:**
+
+  **Part 1 — Debrief log:**
+  After a real interview, the user records: the questions asked, their own answers (written, not audio), where they stumbled (confidence 1–2 on that question), and where their confidence dipped. Stored as a `Debrief` document linked to the kit.
+
+  **Part 2 — Upsolve mock:**
+  Code generates a targeted mock from the debrief. Questions where confidence dipped or stumbles were recorded are surfaced first. The mock runs with a configurable per-question timer (written answer, no audio). After answering, the user rates their confidence again. This is the "upsolve" loop — like reworking a contest problem you got wrong.
+
+  **Part 3 — Pre-interview mock:**
+  A full timed run through the kit's questions, ordered by the improvement loop's confidence data and the schedule's priority order. Scored from data: coverage of must-have requirements, average confidence, improvement delta since the debrief. No model scoring unless the core is done with time to spare.
+
+- **Condition for building:** Core complete (schema, extraction, generation, coverage, schedule, CLI batch, auth, deploy) AND Wednesday 16:00 has not passed.
+- **Consequence in code:** New route `/kits/[id]/debrief` and `/kits/[id]/mock`. New server collection `debriefs`. Pure ordering and scoring functions in `packages/core/src/mock/`.
+- **Consequence in README:** Two to three sentences on why you built it and what problem it solves.
+
+---
+
+## D23. Answer Format for Mock Questions
+
+- **Status: YOU — not yet decided.**
+- **Context:** The brief says audio and video simulation are not credited. Written answers with a timer are the only format that adds value without incurring build risk.
+- **Recommendation:** Written answers with a per-question countdown timer (user-configurable, default 3 minutes). The answer is saved locally in the session only (not persisted), and the user rates their own confidence after reading the reference outline.
+- **Options:**
+  - Written answer + timer + self-rated confidence (recommended).
+  - Timer only, no answer box (less friction, less value).
+  - No timer, just a reveal and rating (same as current flashcard mode — not differentiated enough to count as a distinct feature).
+- **Decision and defence:** Fill this in before building D22.

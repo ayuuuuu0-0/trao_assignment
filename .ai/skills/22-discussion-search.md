@@ -29,10 +29,23 @@ code: packages/core/src/retrieval/search.ts
 - **Relevance filter (code, not model)**: keep a hit only if the company name appears in its title or text and it contains an interview-related word (`interview`, `hiring process`, `take-home`, `onsite`, `recruiter`, `screen`).
 - **Record**: sources used, why others were rejected, what happens on zero hits.
 
+## D21. Data sources without LinkedIn and Glassdoor
+
+- **Hacker News Search API (Algolia)** is the primary public discussion source (already in D3). Free, no credentials, structured JSON.
+- **Pasted-notes field** (`extra_notes`): an optional textarea in `CreateKitForm` where the user pastes raw text from anywhere — LinkedIn comments copied manually, Glassdoor snippets, recruiter emails.
+  - Field label: "Paste any interview notes or Glassdoor/LinkedIn snippets (optional)". Character limit 4,000.
+  - Passed to `extractProcess` as an additional source: `{ label: "user-notes", text: extra_notes }`.
+  - Must go through `wrapUntrusted` before entering any prompt. Never interpolated raw.
+  - Stored as `extra_notes?: string` in the kit input (extension field, listed in DECISIONS.md D21).
+- **Why not scrape LinkedIn or Glassdoor:** both block automated access and violate terms of service. The paste field lets the user bring those sources in without the app scraping them.
+- In the README, list "Hacker News Search API (Algolia)" and "user-pasted notes" as sources. One sentence explaining why LinkedIn/Glassdoor are not scraped.
+
 ## Done when
 - The none_found and failed paths are tested and never stop the pipeline.
 - The relevance filter is code and is tested with hits that should and should not pass.
 - The sources used and rejected are recorded for the README.
+- `extra_notes` is passed through `wrapUntrusted` and appears in the discussion summary prompt when present.
+- An empty `extra_notes` (absent or blank) produces the same output as before.
 
 ---
 Section numbers such as 6.11 in this file refer to the master plan. The map in `.ai/README.md` says which skill holds each section.

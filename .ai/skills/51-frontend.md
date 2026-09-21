@@ -105,6 +105,20 @@ code: packages/web
 - Every screen works at 375 px wide.
 - The save indicator shows Saving, Saved and Could not save.
 - An expired session shows an in-place sign-in and flushes pending edits after login.
+- Dark theme is applied globally. Background is near-black, surface cards are slightly lighter, accent colour is from D18.
+
+## D18. Visual design (always load when building any UI)
+
+Read `DECISIONS.md D18` before writing a single component. Summary of fixed constraints:
+
+- **Always dark.** Background `--bg`: near-black (e.g. `#0a0a0f`). Surface `--surface`: slightly lighter (e.g. `#13131a`) with a 1 px muted border.
+- **Accent colour (YOU — check D18 for the chosen value):** Set as `--accent` CSS variable. Use for primary buttons, active tab indicators, focus rings.
+- **Typography (YOU — check D18):** heading font and body font set in `tailwind.config.ts`. Load via `next/font`.
+- **Contrast:** minimum 4.5:1 for all text. Verify with DevTools.
+- **Reduced motion:** wrap animations in `@media (prefers-reduced-motion: no-preference)`.
+- **Tailwind only.** No inline styles. CSS variables go in `globals.css` under `:root`.
+- **Inspiration reference:** [interviewing.io](https://interviewing.io) — note the panel layout, muted borders, and clear typographic hierarchy. Do not copy; use it as a reference for quality bar.
+
 
 ---
 Section numbers such as 6.11 in this file refer to the master plan. The map in `.ai/README.md` says which skill holds each section.
