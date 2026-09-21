@@ -5,6 +5,7 @@ out
 build
 coverage
 *.log
+*.tsbuildinfo
 .DS_Store
 Thumbs.db
 .env

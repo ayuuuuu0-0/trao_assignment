@@ -14,11 +14,11 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-RES-1 | Crawl the company site for what they do and how they hire, with no fixed paths | 21 | todo |  |  |
 | R-RES-2 | Rank links and fetch the best ones | 21 | todo |  |  |
 | R-RES-3 | Look for public discussion of the interview process | 22 | todo |  |  |
-| R-RES-4 | Skip and report a source that cannot be retrieved | 20 | todo |  |  |
-| R-RES-5 | Rate limit requests and back off on failure | 20 | todo |  |  |
+| R-RES-4 | Skip and report a source that cannot be retrieved | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
+| R-RES-5 | Rate limit requests and back off on failure | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 | R-RES-6 | Respect robots.txt and site terms, and list sources in the README | 21 | todo |  |  |
 | R-GEN-1 | Extract requirements with stable ids, kind and must or nice priority | 31 | todo |  |  |
-| R-GEN-2 | Retrieve and clean an individual page | 20 | todo |  |  |
+| R-GEN-2 | Retrieve and clean an individual page | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 | R-GEN-3 | Generate questions per category in separate calls with different instructions | 33 | todo |  |  |
 | R-GEN-4 | A found hiring process changes the question plan | 33 | todo |  |  |
 | R-GEN-5 | Schedule is allocated by code | 35 | todo |  |  |
@@ -26,10 +26,11 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-GEN-7 | Second pass generates questions for gaps and checks again | 34 | todo |  |  |
 | R-GEN-8 | No must-have ships uncovered | 34 | todo |  |  |
 | R-GEN-9 | Honest brief when nothing is found, nothing invented | 32 | todo |  |  |
-| R-KIT-1 | Kit matches Appendix A with exact field names | 10 | done |  |  |
-| R-KIT-2 | Every id is stable and unique, and questions reference requirement ids | 10 | done |  |  |
-| R-KIT-3 | Durations are integer minutes | 10 | done |  |  |
-| R-KIT-4 | Kit is validated before saving | 10 | done |  |  |
+| R-KIT-1 | Kit matches Appendix A with exact field names | 10 | done | packages/core/src/schema/kit.ts | packages/core/test/validateKit.test.ts |
+| R-KIT-2 | Every id is stable and unique, and questions reference requirement ids | 10 | done | packages/core/src/validate/validateKit.ts | packages/core/test/validateKit.test.ts |
+| R-KIT-3 | Durations are integer minutes | 10 | done | packages/core/src/validate/validateKit.ts | packages/core/test/validateKit.test.ts |
+| R-KIT-4 | Kit is validated before saving | 10 | done | packages/core/src/validate/validateKit.ts | packages/core/test/validateKit.test.ts |
+
 | R-SCH-1 | Schedule has exactly the requested number of days | 35 | todo |  |  |
 | R-SCH-2 | Every day has a focus, question ids and integer minutes | 35 | todo |  |  |
 | R-SCH-3 | Every must-have appears in the schedule | 35 | todo |  |  |
