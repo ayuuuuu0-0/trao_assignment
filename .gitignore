@@ -16,4 +16,5 @@ Thumbs.db
 tmp
 scratch
 test/fixtures/output*.json
+inspiration
 .cache

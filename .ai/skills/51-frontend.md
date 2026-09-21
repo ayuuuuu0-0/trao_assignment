@@ -109,15 +109,28 @@ code: packages/web
 
 ## D18. Visual design (always load when building any UI)
 
-Read `DECISIONS.md D18` before writing a single component. Summary of fixed constraints:
+Read `DECISIONS.md D18` before writing a single component. All choices locked — do not improvise.
 
-- **Always dark.** Background `--bg`: near-black (e.g. `#0a0a0f`). Surface `--surface`: slightly lighter (e.g. `#13131a`) with a 1 px muted border.
-- **Accent colour (YOU — check D18 for the chosen value):** Set as `--accent` CSS variable. Use for primary buttons, active tab indicators, focus rings.
-- **Typography (YOU — check D18):** heading font and body font set in `tailwind.config.ts`. Load via `next/font`.
-- **Contrast:** minimum 4.5:1 for all text. Verify with DevTools.
-- **Reduced motion:** wrap animations in `@media (prefers-reduced-motion: no-preference)`.
-- **Tailwind only.** No inline styles. CSS variables go in `globals.css` under `:root`.
-- **Inspiration reference:** [interviewing.io](https://interviewing.io) — note the panel layout, muted borders, and clear typographic hierarchy. Do not copy; use it as a reference for quality bar.
+| Token | Value | Usage |
+|---|---|---|
+| `--bg` | `#0a0a0f` | Page background |
+| `--surface` | `#13131a` | Cards, panels, sidebar |
+| `--border` | `#1e1e2e` | All borders (1px solid) |
+| `--text-primary` | `#e2e8f0` | Body text, headings |
+| `--text-secondary` | `#64748b` | Labels, captions, placeholders |
+| `--accent` | `#14b8a6` | Buttons, active states, focus rings, links |
+| `--accent-hover` | `#0d9488` | Hover on accent elements |
+
+**Font:** Inter (via `next/font/google`). Weight 700 headings, 500 labels, 400 body. Fallback: `system-ui, sans-serif`.
+
+**Layout:** Sidebar-and-content split for authenticated pages. Centered column for auth/marketing.
+
+**Rules the agent must follow:**
+- All CSS variables go in `globals.css` under `:root`. Never hard-code hex values in components.
+- Tailwind `bg-[var(--bg)]` etc. Use the CSS variables through Tailwind's arbitrary value syntax, or extend `tailwind.config.ts`.
+- Reduced motion: wrap all transitions in `@media (prefers-reduced-motion: no-preference)`.
+- Contrast check: open DevTools after each new UI area. Every text element must pass 4.5:1 against its background.
+- Inspiration reference (do not copy, use as quality bar): `inspiration/` folder in repo root.
 
 
 ---

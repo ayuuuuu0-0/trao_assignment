@@ -174,20 +174,20 @@ This document records the core architectural and implementation decisions for th
 ## D18. Frontend Visual Design
 
 - **Decision:** Dark aesthetic theme with heavy inspiration from [interviewing.io](https://interviewing.io) as a reference. The app must look modern and polished — this is a signal of craft, not just functionality.
-- **Open (YOU — decide before building frontend):**
-  - Accent colour: not yet chosen. Candidates: electric blue, teal, violet. Pick one and note it here.
-  - Font: not yet chosen. Candidates: Inter, Geist, Sora. Pick a heading and a body font.
-  - Layout density: card-based with clear dark panels and subtle borders, or a sidebar-and-content split like interviewing.io.
+- **Locked choices (YOU — approved 21 Sep 2026):**
+  - **Accent colour: Teal.** CSS variable `--accent: #14b8a6` (Tailwind `teal-500`). Hover: `#0d9488` (teal-600). Use for primary buttons, active tab indicators, focus rings, and inline links.
+  - **Font: Inter.** Single font family for both headings and body. Load via `next/font/google`. Heading weight 700, body weight 400, UI labels weight 500. Fallback stack: `system-ui, sans-serif`.
+  - **Layout:** Sidebar-and-content split for authenticated pages (matching interviewing.io's app shell). Marketing/auth pages use a centered column layout.
 - **Fixed constraints:**
-  - Background: near-black (for example `#0a0a0f` or `#0d0d14`), never pure black.
-  - Surface cards: slightly lighter dark (for example `#13131a`), 1 px border in muted colour.
-  - Text: off-white primary, muted secondary (never pure white on pure black).
+  - Background: near-black `#0a0a0f`. Never pure black.
+  - Surface cards: `#13131a` with a `1px solid #1e1e2e` border.
+  - Text: primary `#e2e8f0` (slate-200), secondary `#64748b` (slate-500), muted labels `#334155` (slate-700).
   - Minimum contrast 4.5:1 everywhere. Test with browser DevTools.
   - All interactive states (hover, focus, active) must be visible in the dark theme.
   - Tailwind CSS only. No inline styles, no CSS-in-JS other than Tailwind utilities and `@layer`.
-- **Consequence in code:** `packages/web/src/app/globals.css` defines a dark-mode-first CSS variable set. `tailwind.config.ts` extends the palette with the chosen accent and neutral scale. A `ThemeProvider` is not needed — the app is always dark.
+- **Consequence in code:** `packages/web/src/app/globals.css` defines these CSS variables under `:root`. `tailwind.config.ts` extends the theme with `teal` accent and the above neutral scale. Inter loaded in `packages/web/src/app/layout.tsx` via `next/font/google`. A `ThemeProvider` is not needed — the app is always dark.
 - **Consequence in README:** One screenshot showing the kit viewer page in the dark theme.
-- **Date and who approved:** YOU — fill in after choosing accent and fonts.
+- **Date and who approved:** 21 Sep 2026, user confirmed.
 
 ---
 
@@ -252,11 +252,13 @@ This document records the core architectural and implementation decisions for th
 
 ## D23. Answer Format for Mock Questions
 
-- **Status: YOU — not yet decided.**
-- **Context:** The brief says audio and video simulation are not credited. Written answers with a timer are the only format that adds value without incurring build risk.
-- **Recommendation:** Written answers with a per-question countdown timer (user-configurable, default 3 minutes). The answer is saved locally in the session only (not persisted), and the user rates their own confidence after reading the reference outline.
-- **Options:**
-  - Written answer + timer + self-rated confidence (recommended).
-  - Timer only, no answer box (less friction, less value).
-  - No timer, just a reveal and rating (same as current flashcard mode — not differentiated enough to count as a distinct feature).
-- **Decision and defence:** Fill this in before building D22.
+- **Decision: Written answer + per-question countdown timer + self-rated confidence (confirmed 21 Sep 2026).**
+- **Spec:**
+  - Textarea for the written answer, visible throughout the question. No character minimum, no character maximum.
+  - Per-question countdown timer, user-configurable before the session starts. Default 3 minutes. When the timer reaches zero, the answer textarea is locked and the reveal button activates automatically.
+  - After the timer fires or the user clicks Reveal, the kit's reference answer outline appears below the textarea.
+  - User rates their confidence (1–5) using visible buttons or keyboard keys 1–5. Required before advancing.
+  - Timer state and written answers are session-only — they live in component state and are discarded when the session ends. Only the confidence rating is persisted.
+- **Why written, not audio/video:** The brief explicitly states that audio and video simulation are not credited. Written answers with a timer replicate the written take-home format used in many real processes and add genuine prep value without any risk of scope creep.
+- **Date and who approved:** 21 Sep 2026, user confirmed.
+
