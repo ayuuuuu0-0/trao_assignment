@@ -20,6 +20,10 @@ Creative feature, bulk upload polish, drag and drop (keep the buttons), the opti
 Never cut: coverage loop, deterministic schedule, grounding checks, batch command, honest handling of thin and no-hiring-page cases, state model tests.
 
 ## Progress log
+| Date and time | Step | Status | Notes |
+|---|---|---|---|
 | Sun 20 Sep | Step 0 and Step 1 | Done | Decisions, monorepo, schema, validateKit, thin batch command, 11 tests |
 | Mon 21 Sep | Step 2a safeFetch | Done | SSRF blocking, DNS pinning, redirects, content-type and size caps, 33 tests passing |
+| Mon 21 Sep | Step 2b Crawler & LinkRanker | Done | Robots.txt, sitemaps, link scoring, path prefix scoping, 21 tests passing |
+
 
