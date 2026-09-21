@@ -262,3 +262,73 @@ This document records the core architectural and implementation decisions for th
 - **Why written, not audio/video:** The brief explicitly states that audio and video simulation are not credited. Written answers with a timer replicate the written take-home format used in many real processes and add genuine prep value without any risk of scope creep.
 - **Date and who approved:** 21 Sep 2026, user confirmed.
 
+---
+
+## D24. Deployment Stack
+
+- **Decision (approved 21 Sep 2026):**
+  - **Frontend:** Vercel (Next.js, free hobby tier). Deploy `packages/web` from the monorepo root using Vercel's `rootDirectory` setting.
+  - **Backend API:** Render free tier (Node.js web service). Deploy `packages/server`. Note: Render free instances spin down after 15 minutes of inactivity — first request after idle takes ~30 seconds. Add a note in the README so graders expect this.
+  - **Database:** MongoDB Atlas free tier (M0, 512 MB). One shared cluster.
+  - **Cookie / CORS strategy:** Next.js rewrites proxy (`/api/* → backend URL`) so cookies are first-party and no cross-domain SameSite issues arise.
+  - **Environment variable pattern:** All secrets injected via platform dashboards. No `.env` file committed.
+- **Consequence in code:** `packages/web/next.config.ts` adds a `rewrites()` that proxies `/api/:path*` to `BACKEND_URL`. `BACKEND_URL` is a Vercel env var pointing to the Render service URL.
+- **Consequence in README:** Deployment section links both URLs and notes the Render cold-start delay.
+
+---
+
+## D25. App Name
+
+- **Decision: PrepMe (approved 21 Sep 2026).**
+- **Usage:** Page title (`<title>PrepMe</title>`), favicon alt, `og:site_name`, README H1. All lowercase `prepme` for package names and slugs if needed.
+
+---
+
+## D26. Registration Fields
+
+- **Decision: Email + password only (approved 21 Sep 2026).**
+- **No display name.** The app is single-user in spirit — it is used solo for interview prep, not a social tool. A display name adds a field to validate and store with no UX benefit.
+- **Consequence in code:** `users` MongoDB collection: `{ _id, email (unique, lowercase), passwordHash, createdAt }`. No `name` field. The UI shows the user's email in the header.
+- **Consequence in README:** One-line note: "Registration requires only email and password."
+
+---
+
+## D27. Bulk Upload Row Limit
+
+- **Decision: 10 rows maximum per upload (approved 21 Sep 2026).**
+- **Reason:** 10 cases × ~12 LLM calls = ~120 calls per bulk run. This stays safely within the Gemini free tier of ~500 RPD. Beyond 10, a single upload would risk exhausting the daily quota before the run completes.
+- **Consequence in code:** Server validates `body.length <= 10` and returns `{ error: { code: "TOO_MANY_CASES", message: "Maximum 10 job descriptions per upload." } }` for larger arrays. The frontend shows the limit in the upload label.
+
+---
+
+## D28. Input Character Limits
+
+- **Decision (approved 21 Sep 2026):**
+  - Job description (`jd`): maximum **20,000 characters**. A typical JD is 2–5K. 20K covers even the most verbose postings. The prompt trimmer (D12) caps what is sent to the LLM at 6K regardless, so this is purely a UI validation guard.
+  - Pasted notes (`extra_notes`): maximum **4,000 characters** (D21).
+  - Company URL: maximum **2,048 characters** (standard URL length limit).
+  - Days: integer, minimum 1, maximum 60.
+- **Consequence in code:** Zod schemas in `BatchCaseInputSchema` and the server's create-kit route enforce these limits and return `INVALID_INPUT` with a specific message for each violation.
+
+---
+
+## D29. Session TTL
+
+- **Decision: 7 days (approved 21 Sep 2026).**
+- **Reason:** Users prep over multiple days. A 24-hour TTL would interrupt mid-prep. 7 days matches common web app conventions and the 4-day assignment timeline.
+- **Consequence in code:** MongoDB `sessions` collection has a TTL index on `expiresAt` set to `Date.now() + 7 * 24 * 60 * 60 * 1000`. The cookie `maxAge` is set to the same value.
+
+---
+
+## D30. Demo Job Site Hosting
+
+- **Decision: Vercel, as a separate Vercel project (approved 21 Sep 2026).**
+- **Reason:** Always up, instant deploys, free forever for a static HTML site, no cold-start delay. A separate project keeps the demo site URL independent of the main frontend deploy.
+- **Spec (build before Tuesday clean-clone test):**
+  - Plain HTML + CSS, no build step. Deployable from a `demo-site/` folder in the repo root.
+  - 3 fictional companies: `NexusAI`, `PetalHealth`, `OrbitSystems`.
+    - `NexusAI`: root + About + Careers page with 2 job links. Normal crawl.
+    - `PetalHealth`: root + About only. No Careers page → tests `NO_HIRING_PAGE`.
+    - `OrbitSystems`: root + About + Careers, but `robots.txt` disallows `/careers/` → tests robots compliance.
+  - Add `DEMO_SITE_BASE_URL` env var. Default to the Vercel URL in `.env.example`.
+- **Consequence in code:** `test/fixtures/cases.json` cases 3–5 use `DEMO_SITE_BASE_URL/nexusai/`, `/petalhealth/`, `/orbitsystems/`.
