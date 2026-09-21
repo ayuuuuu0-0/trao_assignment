@@ -13,7 +13,8 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-IN-3 | User states the number of days | 51 | todo |  |  |
 | R-RES-1 | Crawl the company site for what they do and how they hire, with no fixed paths | 21 | done | packages/core/src/retrieval/crawler.ts | packages/core/test/crawler.test.ts |
 | R-RES-2 | Rank links and fetch the best ones | 21 | done | packages/core/src/retrieval/linkRanker.ts | packages/core/test/crawler.test.ts |
-| R-RES-3 | Look for public discussion of the interview process | 22 | todo |  |  |
+| R-RES-3 | Look for public discussion of the interview process | 22 | done | packages/core/src/retrieval/search.ts | packages/core/test/search.test.ts |
+
 | R-RES-4 | Skip and report a source that cannot be retrieved | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 | R-RES-5 | Rate limit requests and back off on failure | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 | R-RES-6 | Respect robots.txt and site terms, and list sources in the README | 21 | done | packages/core/src/retrieval/crawler.ts | packages/core/test/crawler.test.ts |
@@ -57,7 +58,8 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-EDG-1 | Company URL invalid, 404 or timeout | 41 | todo |  |  |
 | R-EDG-2 | Company site has no hiring or about page | 41 | todo |  |  |
 | R-EDG-3 | Two-line job description | 41 | todo |  |  |
-| R-EDG-4 | Public discussion finds nothing | 41 | todo |  |  |
+| R-EDG-4 | Public discussion finds nothing | 41 | done | packages/core/src/retrieval/search.ts | packages/core/test/search.test.ts |
+
 | R-EDG-5 | Model returns invalid JSON or an incomplete kit | 30 | todo |  |  |
 | R-EDG-6 | Provider rate limits or fails briefly | 30 | todo |  |  |
 | R-EDG-7 | Same description and company submitted twice | 40 | todo |  |  |
