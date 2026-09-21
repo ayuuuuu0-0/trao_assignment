@@ -26,6 +26,8 @@ Never cut: coverage loop, deterministic schedule, grounding checks, batch comman
 | Mon 21 Sep | Step 2a safeFetch | Done | SSRF blocking, DNS pinning, redirects, content-type and size caps, 33 tests passing |
 | Mon 21 Sep | Step 2b Crawler & LinkRanker | Done | Robots.txt, sitemaps, link scoring, path prefix scoping, 21 tests passing |
 | Mon 21 Sep | Step 2c Discussion Search | Done | Hacker News Algolia search, relevance filter, degradation, 12 tests passing |
+| Mon 21 Sep | Step 2d Requirement Extraction | Done | Grounding checks, D5 priority rules, prompt injection defense, 12 tests passing |
+
 
 
 

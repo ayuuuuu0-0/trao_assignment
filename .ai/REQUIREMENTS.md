@@ -19,7 +19,8 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-RES-5 | Rate limit requests and back off on failure | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 | R-RES-6 | Respect robots.txt and site terms, and list sources in the README | 21 | done | packages/core/src/retrieval/crawler.ts | packages/core/test/crawler.test.ts |
 
-| R-GEN-1 | Extract requirements with stable ids, kind and must or nice priority | 31 | todo |  |  |
+| R-GEN-1 | Extract requirements with stable ids, kind and must or nice priority | 31 | done | packages/core/src/steps/extractRequirements.ts | packages/core/test/extractRequirements.test.ts |
+
 | R-GEN-2 | Retrieve and clean an individual page | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 | R-GEN-3 | Generate questions per category in separate calls with different instructions | 33 | todo |  |  |
 | R-GEN-4 | A found hiring process changes the question plan | 33 | todo |  |  |
@@ -57,7 +58,7 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-BAT-8 | Works with local company sites and relative links | 21 | done | packages/core/src/retrieval/crawler.ts | packages/core/test/crawler.test.ts |
 | R-EDG-1 | Company URL invalid, 404 or timeout | 41 | todo |  |  |
 | R-EDG-2 | Company site has no hiring or about page | 41 | todo |  |  |
-| R-EDG-3 | Two-line job description | 41 | todo |  |  |
+| R-EDG-3 | Two-line job description | 41 | done | packages/core/src/steps/extractRequirements.ts | packages/core/test/extractRequirements.test.ts |
 | R-EDG-4 | Public discussion finds nothing | 41 | done | packages/core/src/retrieval/search.ts | packages/core/test/search.test.ts |
 
 | R-EDG-5 | Model returns invalid JSON or an incomplete kit | 30 | todo |  |  |
@@ -66,8 +67,9 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-EDG-8 | One-day and sixty-day schedules | 35 | todo |  |  |
 | R-SEC-1 | Validate external URLs and reject private and loopback addresses in production | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 
-| R-SEC-2 | Restrict content types and sizes | 20 | todo |  |  |
-| R-SEC-3 | Page and job description text is data, never instructions | 23 | todo |  |  |
+| R-SEC-2 | Restrict content types and sizes | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
+| R-SEC-3 | Page and job description text is data, never instructions | 23 | done | packages/core/src/llm/wrapUntrusted.ts | packages/core/test/extractRequirements.test.ts |
+
 | R-FE-1 | Next.js with Tailwind CSS | 51 | todo |  |  |
 | R-FE-2 | Loading, empty and error states, including during generation | 51 | todo |  |  |
 | R-FE-3 | Usable on laptop and phone and by keyboard | 51 | todo |  |  |

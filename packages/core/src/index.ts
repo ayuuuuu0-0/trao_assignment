@@ -6,5 +6,8 @@ export * from "./retrieval/isPrivateIp.js";
 export * from "./retrieval/linkRanker.js";
 export * from "./retrieval/crawler.js";
 export * from "./retrieval/search.js";
+export * from "./llm/wrapUntrusted.js";
+export * from "./steps/extractRequirements.js";
+
 
 
