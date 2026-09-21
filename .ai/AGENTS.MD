@@ -52,6 +52,11 @@ Standard software engineering workflow and coding practices for building reliabl
 3. **Repository Cleanliness:**
    - Keep root and source folders clean of temporary files, screenshots, logs, or duplicates.
    - Maintain a synchronized environment template containing only actively utilized variables with dummy values. Never track active secret files.
+4. **Dead Code:**
+   - Remove dead code as soon as it is no longer needed. Do not comment it out. Do not leave it "just in case". Delete it, tests will catch regressions.
+   - Before committing each step, grep for unused imports, unreachable branches, exported functions with no callers, and types that no code uses. Remove them.
+   - Dead code is a commit on its own only if the cleanup is large. For small removals, fold it into the commit that made the code dead.
+
 
 ---
 
