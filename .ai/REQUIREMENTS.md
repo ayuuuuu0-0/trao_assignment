@@ -38,11 +38,12 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-SCH-2 | Every day has a focus, question ids and integer minutes | 35 | todo |  |  |
 | R-SCH-3 | Every must-have appears in the schedule | 35 | todo |  |  |
 | R-SCH-4 | Harder and higher priority material lands earlier | 35 | todo |  |  |
-| R-BLD-1 | Edit any question, outline, flashcard or brief inline | 50 | todo |  |  |
-| R-BLD-2 | Reorder questions and move one between categories | 50 | todo |  |  |
-| R-BLD-3 | Add and delete a question or flashcard | 50 | todo |  |  |
-| R-BLD-4 | Regenerate the brief, one category or the schedule alone | 50 | todo |  |  |
-| R-BLD-5 | Regeneration keeps edits elsewhere and hand-written items | 50 | todo |  |  |
+| R-BLD-1 | Edit any question, outline, flashcard or brief inline | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
+| R-BLD-2 | Reorder questions and move one between categories | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
+| R-BLD-3 | Add and delete a question or flashcard | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
+| R-BLD-4 | Regenerate the brief, one category or the schedule alone | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
+| R-BLD-5 | Regeneration keeps edits elsewhere and hand-written items | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
+
 | R-BLD-6 | Editing and reordering feel immediate | 51 | todo |  |  |
 | R-PRC-1 | Step through flashcards one at a time with a reveal | 52 | todo |  |  |
 | R-PRC-2 | Record confidence per card | 52 | todo |  |  |

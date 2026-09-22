@@ -147,6 +147,13 @@ export const ResearchRecordSchema = z.object({
 });
 export type ResearchRecord = z.infer<typeof ResearchRecordSchema>;
 
+export const IdCountersSchema = z.object({
+  r: z.number().int().nonnegative().default(0),
+  q: z.number().int().nonnegative().default(0),
+  f: z.number().int().nonnegative().default(0)
+});
+export type IdCounters = z.infer<typeof IdCountersSchema>;
+
 export const KitSchema = z.object({
   source: SourceSchema,
   company_brief: CompanyBriefSchema,
@@ -156,9 +163,11 @@ export const KitSchema = z.object({
   schedule: ScheduleSchema,
   coverage: CoverageSchema,
   warnings: z.array(WarningSchema).optional(),
-  research: ResearchRecordSchema.optional()
+  research: ResearchRecordSchema.optional(),
+  id_counters: IdCountersSchema.optional()
 });
 export type Kit = z.infer<typeof KitSchema>;
+
 
 export const BatchCaseInputSchema = z.object({
   id: z.string().min(1),

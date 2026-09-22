@@ -8,6 +8,8 @@ export * from "./retrieval/crawler.js";
 export * from "./retrieval/search.js";
 export * from "./llm/wrapUntrusted.js";
 export * from "./steps/extractRequirements.js";
+export * from "./ops/kitOps.js";
+
 
 
 
