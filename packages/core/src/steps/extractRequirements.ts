@@ -10,6 +10,7 @@ import {
   wrapUntrusted,
   UNTRUSTED_DATA_SYSTEM_INSTRUCTION,
 } from "../llm/wrapUntrusted.js";
+import { ILlmClient } from "../llm/types.js";
 
 export const RawRequirementItemSchema = z.object({
   text: z.string().min(1),
@@ -29,14 +30,8 @@ export const RawExtractionSchema = z.object({
 
 export type RawExtraction = z.infer<typeof RawExtractionSchema>;
 
-export interface ILlmClient {
-  generateJson<T>(
-    prompt: { system: string; user: string },
-    schema: z.ZodType<T>
-  ): Promise<T>;
-}
-
 export interface ExtractionResult {
+
   role: Role;
   sourceDetails: {
     company: string;

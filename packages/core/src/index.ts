@@ -9,6 +9,11 @@ export * from "./retrieval/search.js";
 export * from "./llm/wrapUntrusted.js";
 export * from "./steps/extractRequirements.js";
 export * from "./ops/kitOps.js";
+export * from "./llm/types.js";
+export * from "./llm/circuitBreaker.js";
+export * from "./llm/devCache.js";
+export * from "./llm/fakeLlmClient.js";
+export * from "./llm/llmClient.js";
 
 
 

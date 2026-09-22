@@ -62,8 +62,9 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-EDG-3 | Two-line job description | 41 | done | packages/core/src/steps/extractRequirements.ts | packages/core/test/extractRequirements.test.ts |
 | R-EDG-4 | Public discussion finds nothing | 41 | done | packages/core/src/retrieval/search.ts | packages/core/test/search.test.ts |
 
-| R-EDG-5 | Model returns invalid JSON or an incomplete kit | 30 | todo |  |  |
-| R-EDG-6 | Provider rate limits or fails briefly | 30 | todo |  |  |
+| R-EDG-5 | Model returns invalid JSON or an incomplete kit | 30 | done | packages/core/src/llm/llmClient.ts | packages/core/test/llmClient.test.ts |
+| R-EDG-6 | Provider rate limits or fails briefly | 30 | done | packages/core/src/llm/llmClient.ts | packages/core/test/llmClient.test.ts |
+
 | R-EDG-7 | Same description and company submitted twice | 40 | todo |  |  |
 | R-EDG-8 | One-day and sixty-day schedules | 35 | todo |  |  |
 | R-SEC-1 | Validate external URLs and reject private and loopback addresses in production | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
