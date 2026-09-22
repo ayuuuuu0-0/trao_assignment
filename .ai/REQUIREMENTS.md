@@ -22,22 +22,22 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-GEN-1 | Extract requirements with stable ids, kind and must or nice priority | 31 | done | packages/core/src/steps/extractRequirements.ts | packages/core/test/extractRequirements.test.ts |
 
 | R-GEN-2 | Retrieve and clean an individual page | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
-| R-GEN-3 | Generate questions per category in separate calls with different instructions | 33 | todo |  |  |
-| R-GEN-4 | A found hiring process changes the question plan | 33 | todo |  |  |
-| R-GEN-5 | Schedule is allocated by code | 35 | todo |  |  |
-| R-GEN-6 | Coverage comparison is done by code | 34 | todo |  |  |
-| R-GEN-7 | Second pass generates questions for gaps and checks again | 34 | todo |  |  |
-| R-GEN-8 | No must-have ships uncovered | 34 | todo |  |  |
-| R-GEN-9 | Honest brief when nothing is found, nothing invented | 32 | todo |  |  |
+| R-GEN-3 | Generate questions per category in separate calls with different instructions | 33 | done | packages/core/src/steps/generateQuestions.ts | packages/core/test/generateQuestions.test.ts |
+| R-GEN-4 | A found hiring process changes the question plan | 33 | done | packages/core/src/steps/planQuestions.ts | packages/core/test/extractProcess.test.ts |
+| R-GEN-5 | Schedule is allocated by code | 35 | done | packages/core/src/schedule/allocate.ts | packages/core/test/allocateSchedule.test.ts |
+| R-GEN-6 | Coverage comparison is done by code | 34 | done | packages/core/src/coverage/checkCoverage.ts | packages/core/test/coverage.test.ts |
+| R-GEN-7 | Second pass generates questions for gaps and checks again | 34 | done | packages/core/src/coverage/coverageLoop.ts | packages/core/test/coverage.test.ts |
+| R-GEN-8 | No must-have ships uncovered | 34 | done | packages/core/src/coverage/coverageLoop.ts | packages/core/test/coverage.test.ts |
+| R-GEN-9 | Honest brief when nothing is found, nothing invented | 32 | done | packages/core/src/steps/companyBrief.ts | packages/core/test/companyBrief.test.ts |
 | R-KIT-1 | Kit matches Appendix A with exact field names | 10 | done | packages/core/src/schema/kit.ts | packages/core/test/validateKit.test.ts |
 | R-KIT-2 | Every id is stable and unique, and questions reference requirement ids | 10 | done | packages/core/src/validate/validateKit.ts | packages/core/test/validateKit.test.ts |
 | R-KIT-3 | Durations are integer minutes | 10 | done | packages/core/src/validate/validateKit.ts | packages/core/test/validateKit.test.ts |
 | R-KIT-4 | Kit is validated before saving | 10 | done | packages/core/src/validate/validateKit.ts | packages/core/test/validateKit.test.ts |
 
-| R-SCH-1 | Schedule has exactly the requested number of days | 35 | todo |  |  |
-| R-SCH-2 | Every day has a focus, question ids and integer minutes | 35 | todo |  |  |
-| R-SCH-3 | Every must-have appears in the schedule | 35 | todo |  |  |
-| R-SCH-4 | Harder and higher priority material lands earlier | 35 | todo |  |  |
+| R-SCH-1 | Schedule has exactly the requested number of days | 35 | done | packages/core/src/schedule/allocate.ts | packages/core/test/allocateSchedule.test.ts |
+| R-SCH-2 | Every day has a focus, question ids and integer minutes | 35 | done | packages/core/src/schedule/allocate.ts | packages/core/test/allocateSchedule.test.ts |
+| R-SCH-3 | Every must-have appears in the schedule | 35 | done | packages/core/src/schedule/allocate.ts | packages/core/test/allocateSchedule.test.ts |
+| R-SCH-4 | Harder and higher priority material lands earlier | 35 | done | packages/core/src/schedule/allocate.ts | packages/core/test/allocateSchedule.test.ts |
 | R-BLD-1 | Edit any question, outline, flashcard or brief inline | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
 | R-BLD-2 | Reorder questions and move one between categories | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
 | R-BLD-3 | Add and delete a question or flashcard | 50 | partial | packages/core/src/ops/kitOps.ts | packages/core/test/kitOps.test.ts |
@@ -66,7 +66,7 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-EDG-6 | Provider rate limits or fails briefly | 30 | done | packages/core/src/llm/llmClient.ts | packages/core/test/llmClient.test.ts |
 
 | R-EDG-7 | Same description and company submitted twice | 40 | todo |  |  |
-| R-EDG-8 | One-day and sixty-day schedules | 35 | todo |  |  |
+| R-EDG-8 | One-day and sixty-day schedules | 35 | done | packages/core/src/schedule/allocate.ts | packages/core/test/allocateSchedule.test.ts |
 | R-SEC-1 | Validate external URLs and reject private and loopback addresses in production | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
 
 | R-SEC-2 | Restrict content types and sizes | 20 | done | packages/core/src/retrieval/safeFetch.ts | packages/core/test/safeFetch.test.ts |
@@ -79,7 +79,7 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-BE-2 | A kit can be reopened and continued later | 40 | todo |  |  |
 | R-BE-3 | Structured error responses | 42 | todo |  |  |
 | R-BE-4 | Long generation, failure halfway and double trigger are handled | 40 | todo |  |  |
-| R-Q-1 | Tests for schedule allocation, coverage checking and structure validation | 60 | partial |  |  |
+| R-Q-1 | Tests for schedule allocation, coverage checking and structure validation | 60 | done | packages/core/src/schedule/allocate.ts, packages/core/src/coverage/checkCoverage.ts | packages/core/test/allocateSchedule.test.ts, packages/core/test/coverage.test.ts, packages/core/test/validateKit.test.ts |
 | R-Q-2 | Meaningful commits | 01 | partial |  |  |
 | R-Q-3 | JavaScript or TypeScript only | 00 | done |  |  |
 | R-SUB-1 | Public deployment, frontend and backend reachable | 61 | todo |  |  |

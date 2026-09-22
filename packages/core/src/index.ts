@@ -14,6 +14,15 @@ export * from "./llm/circuitBreaker.js";
 export * from "./llm/devCache.js";
 export * from "./llm/fakeLlmClient.js";
 export * from "./llm/llmClient.js";
+export * from "./steps/companyBrief.js";
+export * from "./steps/extractProcess.js";
+export * from "./steps/planQuestions.js";
+export * from "./steps/generateQuestions.js";
+export * from "./steps/generateFlashcards.js";
+export * from "./coverage/checkCoverage.js";
+export * from "./coverage/coverageLoop.js";
+export * from "./schedule/allocate.js";
+
 
 
 
