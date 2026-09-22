@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PrepMe Demo Companies Portal</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0f172a; color: #f8fafc; margin: 40px auto; max-width: 800px; padding: 0 20px; line-height: 1.6; }
+    h1 { color: #14b8a6; }
+    .card { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 20px; margin-bottom: 20px; }
+    a { color: #38bdf8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    code { background: #090d16; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <h1>PrepMe Fictional Companies Test Portal</h1>
+  <p>Static test environment representing realistic corporate sites for evaluation, crawling, and grounding verification.</p>
+
+  <div class="card">
+    <h2>1. NexusAI</h2>
+    <p>AI infrastructure company with an explicit 4-stage hiring process described on their Careers page.</p>
+    <ul>
+      <li><a href="/nexusai/">Home</a></li>
+      <li><a href="/nexusai/about.html">About NexusAI</a></li>
+      <li><a href="/nexusai/careers/">Careers &amp; Hiring Process</a></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>2. PetalHealth</h2>
+    <p>Digital healthcare provider. Has an About page describing HIPAA compliance, but <strong>no careers page</strong> (tests no-hiring-page handling).</p>
+    <ul>
+      <li><a href="/petalhealth/">Home</a></li>
+      <li><a href="/petalhealth/about.html">About PetalHealth</a></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h2>3. OrbitSystems</h2>
+    <p>Satellite communication systems. Has an active careers section, but <code>robots.txt</code> disallows automated crawling of <code>/orbitsystems/careers/</code>.</p>
+    <ul>
+      <li><a href="/orbitsystems/">Home</a></li>
+      <li><a href="/orbitsystems/about.html">About OrbitSystems</a></li>
+      <li><a href="/orbitsystems/careers/">Careers (Disallowed by robots.txt)</a></li>
+    </ul>
+  </div>
+</body>
+</html>

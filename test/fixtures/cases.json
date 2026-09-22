@@ -1,14 +1,32 @@
 [
   {
     "id": "case-01",
-    "jd": "Senior Backend Engineer\n\nWe are looking for a Senior Backend Engineer with 5+ years of Node.js and TypeScript experience to design high-throughput microservices. Experience with distributed caching and message brokers like Kafka is required.",
-    "company_url": "http://localhost:8099/acme/",
+    "jd": "Senior Backend Engineer at NexusAI\nLocation: San Francisco, CA / Remote\n\nAbout the Role:\nWe are seeking an experienced Senior Backend Engineer to architect, build, and scale our core platform infrastructure. You will work on real-time inference routing engines and distributed message processing systems.\n\nKey Responsibilities:\n- Design, deploy, and maintain high-throughput backend services using TypeScript and Node.js.\n- Architect robust database models and execute zero-downtime PostgreSQL schema migrations.\n- Optimize system performance, latency, and resource utilization across Kubernetes clusters.\n- Mentor junior engineers and champion clean code standards and automated testing.\n\nRequired Qualifications:\n- 5+ years building backend web services and distributed systems in production (required).\n- Expert proficiency in TypeScript and Node.js backend development (required).\n- Deep knowledge of relational databases, especially PostgreSQL indexing and query optimization (required).\n- Strong written communication and empathetic collaboration skills (essential).\n\nNice to Have:\n- Experience with Docker and Kubernetes container orchestration.\n- Familiarity with event streaming platforms like Apache Kafka.",
+    "company_url": "http://localhost:8099/nexusai/",
     "days": 5
   },
   {
     "id": "case-02",
-    "jd": "Frontend Developer\n\nMust have 3 years React and modern CSS. Nice to have Tailwind and GraphQL experience.",
-    "company_url": "http://localhost:8099/globex/",
+    "jd": "Lead Python Platform Engineer at PetalHealth\nLocation: Remote\n\nResponsibilities:\n- Build and operate HIPAA-compliant patient health records services.\n- Implement robust REST APIs using Python, FastAPI, and PostgreSQL.\n- Maintain high security standards, encryption at rest, and audit logging.\n\nRequirements:\n- 4+ years of professional backend development with Python and FastAPI (required).\n- Experience designing and managing relational databases with PostgreSQL (required).\n- Understanding of healthcare privacy regulations like HIPAA (required).\n- Collaborative team player with excellent documentation habits (essential).",
+    "company_url": "http://localhost:8099/petalhealth/",
     "days": 3
+  },
+  {
+    "id": "case-03",
+    "jd": "Full Stack Engineer\nMust know React, TypeScript, and Go.",
+    "company_url": "http://localhost:8099/nexusai/",
+    "days": 1
+  },
+  {
+    "id": "case-04",
+    "jd": "Frontend Web Engineer\nWe are seeking a Frontend Engineer to build interactive web applications.\n\nResponsibilities:\n- Build performant user interfaces with React, Next.js, and modern CSS.\n- Collaborate with product designers and backend engineers.\n\nRequirements:\n- Strong proficiency in modern JavaScript, HTML5, and CSS3 (required).\n- Experience building single page applications with React (required).\n- Understanding of web accessibility standards (WCAG) (essential).",
+    "company_url": "https://non-existent-domain-404-timeout.invalid/",
+    "days": 4
+  },
+  {
+    "id": "case-05",
+    "jd": "Telemetry Systems Engineer at OrbitSystems\nLocation: Boulder, CO / Hybrid\n\nOverview:\nOrbitSystems is seeking a Systems Engineer to develop ground station telemetry decoding software for commercial satellite constellations.\n\nResponsibilities:\n- Implement real-time telemetry processing pipelines in Rust and C++.\n- Build high-reliability distributed event logging systems.\n- Monitor ground station communication links and automate recovery procedures.\n\nRequirements:\n- Proficiency in systems programming with Rust or C++ (required).\n- Hands-on experience with Linux systems and network socket programming (required).\n- Demonstrated problem solving under time-critical operational constraints (essential).\n\nBonus Qualifications:\n- Familiarity with aerospace telemetry protocols (CCSDS).\n- Prior experience with SDR (Software Defined Radio).",
+    "company_url": "http://localhost:8099/orbitsystems/",
+    "days": 7
   }
 ]

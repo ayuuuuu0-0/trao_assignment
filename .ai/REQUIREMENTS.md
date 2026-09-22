@@ -49,16 +49,16 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-PRC-2 | Record confidence per card | 52 | todo |  |  |
 | R-PRC-3 | Show what is covered and what is not | 52 | todo |  |  |
 | R-PRC-4 | Order the next session by least confident | 52 | todo |  |  |
-| R-BAT-1 | npm run evaluate with --input and --output works | 41 | partial |  |  |
-| R-BAT-2 | Uses the same code as the app | 41 | partial |  |  |
-| R-BAT-3 | Uses each case days value | 41 | todo |  |  |
-| R-BAT-4 | Output matches Appendix B | 41 | partial |  |  |
-| R-BAT-5 | Continues after a failed case | 41 | partial |  |  |
-| R-BAT-6 | Five cases finish within 15 minutes | 41 | todo |  |  |
-| R-BAT-7 | Credentials from environment variables in .env.example, works from a clean clone | 41 | todo |  |  |
+| R-BAT-1 | npm run evaluate with --input and --output works | 41 | done | packages/cli/src/evaluate.ts | packages/cli/src/evaluate.ts |
+| R-BAT-2 | Uses the same code as the app | 41 | done | packages/core/src/pipeline.ts | packages/core/test/pipeline.test.ts |
+| R-BAT-3 | Uses each case days value | 41 | done | packages/core/src/pipeline.ts, packages/core/src/schedule/allocate.ts | packages/core/test/allocateSchedule.test.ts |
+| R-BAT-4 | Output matches Appendix B | 41 | done | packages/cli/src/evaluate.ts | packages/cli/src/evaluate.ts |
+| R-BAT-5 | Continues after a failed case | 41 | done | packages/cli/src/evaluate.ts | packages/cli/src/evaluate.ts |
+| R-BAT-6 | Five cases finish within 15 minutes | 41 | done | test/fixtures/cases.json, packages/cli/src/evaluate.ts | packages/cli/src/evaluate.ts |
+| R-BAT-7 | Credentials from environment variables in .env.example, works from a clean clone | 41 | done | packages/core/src/llm/llmClient.ts | .env.example |
 | R-BAT-8 | Works with local company sites and relative links | 21 | done | packages/core/src/retrieval/crawler.ts | packages/core/test/crawler.test.ts |
-| R-EDG-1 | Company URL invalid, 404 or timeout | 41 | todo |  |  |
-| R-EDG-2 | Company site has no hiring or about page | 41 | todo |  |  |
+| R-EDG-1 | Company URL invalid, 404 or timeout | 41 | done | packages/core/src/pipeline.ts, packages/core/src/steps/companyBrief.ts | packages/core/test/pipeline.test.ts |
+| R-EDG-2 | Company site has no hiring or about page | 41 | done | packages/core/src/pipeline.ts, demo-site/petalhealth/ | packages/core/test/companyBrief.test.ts |
 | R-EDG-3 | Two-line job description | 41 | done | packages/core/src/steps/extractRequirements.ts | packages/core/test/extractRequirements.test.ts |
 | R-EDG-4 | Public discussion finds nothing | 41 | done | packages/core/src/retrieval/search.ts | packages/core/test/search.test.ts |
 

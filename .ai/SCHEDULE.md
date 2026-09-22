@@ -30,6 +30,8 @@ Never cut: coverage loop, deterministic schedule, grounding checks, batch comman
 | Tue 22 Sep | Step 3a Kit Operations & State Model | Done | Pure operations, stored ID counters, merge-time category regeneration, 14 tests passing |
 | Tue 22 Sep | Step 3b LLM Client & Fallback Chain | Done | Multi-provider chain, 429 daily quota discrimination, circuit breaker, dev cache, 8 tests passing |
 | Tue 22 Sep | Step 3c Generation, Coverage & Schedule | Done | Company brief, hiring process, category questions, flashcards, coverage loop, deterministic schedule allocator, 36 new tests (136 total) passing |
+| Tue 22 Sep | Step 3d End-to-End Pipeline & 5-Case CLI Batch | Done | Complete pipeline, demo-site (NexusAI, PetalHealth, OrbitSystems), 5-case batch runner, 141 tests passing |
+
 
 
 
