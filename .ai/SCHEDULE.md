@@ -31,6 +31,8 @@ Never cut: coverage loop, deterministic schedule, grounding checks, batch comman
 | Tue 22 Sep | Step 3b LLM Client & Fallback Chain | Done | Multi-provider chain, 429 daily quota discrimination, circuit breaker, dev cache, 8 tests passing |
 | Tue 22 Sep | Step 3c Generation, Coverage & Schedule | Done | Company brief, hiring process, category questions, flashcards, coverage loop, deterministic schedule allocator, 36 new tests (136 total) passing |
 | Tue 22 Sep | Step 3d End-to-End Pipeline & 5-Case CLI Batch | Done | Complete pipeline, demo-site (NexusAI, PetalHealth, OrbitSystems), 5-case batch runner, 141 tests passing |
+| Wed 23 Sep | Step 4 Server Backend, Auth & Jobs | Done | Express + MongoDB server, JWT cookie auth, background jobs runner, kit builder API, practice API, 4 integration tests passing |
+| Wed 23 Sep | Step 5 Next.js Web App & UI Builder | Done | Next.js 15 + Tailwind CSS, dark interviewing.io theme, kit dashboard, interactive builder with inline editing, category reorder, D17 undo snapshot, 60s practice mode with timer, all 145 tests passing, zero-error production build |
 
 
 
