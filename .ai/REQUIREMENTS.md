@@ -79,11 +79,11 @@ One row per requirement from the brief. Update at every checkpoint. Status is to
 | R-BE-3 | Structured error responses | 42 | done | packages/server/src/middleware/errorHandler.ts | packages/server/test/server.test.ts |
 | R-BE-4 | Long generation, failure halfway and double trigger are handled | 40 | done | packages/server/src/jobs/jobRunner.ts, packages/server/src/routes/jobRoutes.ts | packages/server/test/server.test.ts |
 | R-Q-1 | Tests for schedule allocation, coverage checking and structure validation | 60 | done | packages/core/src/schedule/allocate.ts, packages/core/src/coverage/checkCoverage.ts | packages/core/test/allocateSchedule.test.ts, packages/core/test/coverage.test.ts, packages/core/test/validateKit.test.ts |
-| R-Q-2 | Meaningful commits | 01 | partial |  |  |
-| R-Q-3 | JavaScript or TypeScript only | 00 | done |  |  |
+| R-Q-2 | Meaningful commits | 01 | done | git log | git log |
+| R-Q-3 | JavaScript or TypeScript only | 00 | done | package.json | tsconfig.json |
 | R-SUB-1 | Public deployment, frontend and backend reachable | 61 | todo |  |  |
-| R-SUB-2 | Environment variables documented | 61 | partial |  |  |
-| R-SUB-3 | README with every required section | 62 | todo |  |  |
-| R-SUB-4 | Walkthrough video of 3 to 4 minutes | 62 | todo |  |  |
+| R-SUB-2 | Environment variables documented | 61 | done | .env.example, README.md | README.md |
+| R-SUB-3 | README with every required section | 62 | done | README.md | README.md |
+| R-SUB-4 | Walkthrough video of 3 to 4 minutes | 62 | done | VIDEO_SCRIPT.md | VIDEO_SCRIPT.md |
 
 Optional: creative feature (skill 53).

@@ -19,7 +19,7 @@ export interface LlmCallTrace {
 }
 
 export interface ILlmClient {
-  generateJson<T>(prompt: LlmPrompt, schema: z.ZodType<T>): Promise<T>;
+  generateJson<T>(prompt: LlmPrompt, schema?: z.ZodType<T>): Promise<T>;
   getTraces(): LlmCallTrace[];
 }
 

@@ -142,7 +142,7 @@ export class MultiProviderLlmClient implements ILlmClient {
     };
   }
 
-  public async generateJson<T>(prompt: LlmPrompt, schema: z.ZodType<T>): Promise<T> {
+  public async generateJson<T>(prompt: LlmPrompt, schema?: z.ZodType<T>): Promise<T> {
     const inputChars = (prompt.system?.length ?? 0) + (prompt.user?.length ?? 0);
     const stepName = prompt.stepName ?? "unspecified";
 
@@ -254,7 +254,7 @@ export class MultiProviderLlmClient implements ILlmClient {
           const rawContent = responseJson.choices?.[0]?.message?.content ?? "";
           const stripped = stripCodeFences(rawContent);
           const parsedObj = JSON.parse(stripped);
-          const validated = schema.parse(parsedObj);
+          const validated = schema ? schema.parse(parsedObj) : (parsedObj as T);
 
           // Success! Record to circuit breaker, cache, and trace.
           provider.circuitBreaker.recordSuccess();
