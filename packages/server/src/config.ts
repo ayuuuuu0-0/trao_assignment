@@ -3,6 +3,7 @@ import path from "node:path";
 import process from "node:process";
 
 // Load root .env if present
+dotenv.config({ path: path.resolve(process.cwd(), ".env") });
 dotenv.config({ path: path.resolve(process.cwd(), "../../.env") });
 dotenv.config();
 
